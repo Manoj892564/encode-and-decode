@@ -1,0 +1,31 @@
+def encode_decode(input_file, output_file, key):
+    try:
+        with open(input_file, "rb") as f:
+            data = f.read()
+
+        encoded_data = bytearray()
+        for byte in data:
+            encoded_data.append(byte ^ key)  # XOR operation
+
+        with open(output_file, "wb") as f:
+            f.write(encoded_data)
+
+        print(f"\n✔ Operation completed successfully!")
+        print(f"✔ Output saved to: {output_file}\n")
+
+    except FileNotFoundError:
+        print("\n❌ Error: Input file not found!\n")
+
+
+# -------- MAIN PROGRAM ----------
+if __name__ == "__main__":
+    print("====== FILE ENCODER / DECODER ======")
+    print("1. Encode File")
+    print("2. Decode File")
+    choice = int(input("Enter your choice (1/2): "))
+
+    input_file = input("Enter input file name: ")
+    output_file = input("Enter output file name: ")
+    key = int(input("Enter secret key (0–255): "))
+
+    encode_decode(input_file, output_file, key)
